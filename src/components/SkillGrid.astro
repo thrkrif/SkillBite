@@ -1,0 +1,38 @@
+---
+import SkillCard from './SkillCard.astro';
+import EmptyCard from './EmptyCard.astro';
+
+const { skills } = Astro.props;
+const categories = [...new Set(skills.map((s) => s.category))];
+const showFilter = skills.length >= 3;
+---
+{showFilter && (
+  <div class="filters" role="group" aria-label="카테고리">
+    <button class="chip" type="button" data-filter="" aria-pressed="true">전체</button>
+    {categories.map((c) => <button class="chip" type="button" data-filter={c} aria-pressed="false">{c}</button>)}
+  </div>
+)}
+<div class="grid">
+  {skills.map((s) => <SkillCard skill={s} />)}
+  <EmptyCard />
+</div>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .filters .chip { min-height: 44px; padding: 0 16px; cursor: pointer; }
+  .filters .chip[aria-pressed='true'] { background: var(--text); color: #fff; border-color: var(--text); font-weight: 700; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  @media (max-width: 639px) { .grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      document.querySelectorAll<HTMLElement>('.card').forEach((card) => {
+        card.hidden = !!btn.dataset.filter && card.dataset.category !== btn.dataset.filter;
+      });
+    });
+  });
+</script>
