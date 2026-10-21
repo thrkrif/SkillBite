@@ -11,10 +11,7 @@ export const mac = {
 
 export const windows = null;
 
-// Claude Code에서 직접 확인함: 세션을 초기화하지 않아도 바로 사용 가능. 데스크톱 앱은 미확인.
-export const restartNote = {
-  claudeCode: '다시 켜지 않아도 폴더를 넣자마자 바로 쓸 수 있습니다.',
-  desktopApp: PENDING,
-};
+// Claude Code와 데스크톱 앱 모두 직접 확인함: 앱을 다시 켜지 않아도 폴더를 넣자마자 바로 사용 가능.
+export const restartNote = '다시 켜지 않아도 폴더를 넣자마자 바로 쓸 수 있습니다.';
 
 export const feedbackUrl = '';
