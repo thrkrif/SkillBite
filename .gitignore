@@ -1,0 +1,16 @@
+# 시크릿
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# 의존성·빌드
+node_modules/
+dist/
+.astro/
+
+# 로컬 도구
+.claude/settings.local.json
+.omc/
+.DS_Store

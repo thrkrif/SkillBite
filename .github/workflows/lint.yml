@@ -1,0 +1,29 @@
+name: lint
+
+on:
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 브랜치명 검사
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: bash scripts/check-branch-name.sh "$HEAD_REF"
+
+  commit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: 커밋 메시지 검사
+        run: npx commitlint --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}" --verbose
