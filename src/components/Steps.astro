@@ -8,9 +8,9 @@ const oses = [
   { key: 'windows', label: '윈도우' },
 ];
 ---
-<section class="section">
+<section class="section" id="installation">
   <h2>설치 4단계</h2>
-  <div class="tabs" role="group" aria-label="운영체제">
+  <div class="tabs" role="group" aria-label="운영체제" hidden>
     {oses.map((o, i) => (
       <button class="tab" type="button" data-os={o.key} aria-pressed={String(i === 0)}>{o.label}</button>
     ))}
@@ -33,19 +33,19 @@ const oses = [
             <li><strong>폴더가 열렸다면:</strong> 2번에서 압축을 푼 <code>{skill.id}</code> 폴더를 이 창으로 끌어다 놓습니다. 이미 스킬을 쓰고 계셨던 분은 다른 스킬 폴더들이 같이 보입니다.</li>
             <li><strong>같은 이름의 폴더가 이미 있다면:</strong> '바꾸기'를 누르면 새 파일로 교체됩니다.</li>
           </ol>
-          <div class="box warn">
-            <strong>"폴더를 찾을 수 없습니다"라고 나온다면</strong>
+          <details class="box warn">
+            <summary>"폴더를 찾을 수 없습니다"라고 나온다면</summary>
             <p>Claude를 처음 쓰시는 분은 이 폴더가 아직 없습니다. 만들어 주면 됩니다.</p>
             <ol class="sub">
               <li><strong>터미널</strong> 앱을 엽니다. (<kbd>⌘ + Space</kbd>를 누르고 '터미널'을 입력)</li>
               <li>아래 한 줄을 붙여넣고 Enter를 누릅니다. 화면에 아무 말이 없으면 잘 된 것입니다.<CodeBox text={mac.makeDirCommand} /></li>
               <li>위의 1번부터 다시 따라 합니다.</li>
             </ol>
-          </div>
+          </details>
           <p class="meta">보이지 않는 파일을 Finder에서 보려면 <kbd>{mac.showHiddenKeys}</kbd>를 누르세요. 다시 누르면 숨겨집니다.</p>
         </div>
-        <div class="os-panel" data-os-panel="windows" hidden>
-          <p class="meta">윈도우 안내는 준비 중입니다. {PENDING}</p>
+        <div class="os-panel" data-os-panel="windows">
+          <h3>윈도우 설치 안내</h3><p class="meta">윈도우 설치 경로는 {PENDING}입니다. 안내를 확인한 뒤 제공하겠습니다.</p>
         </div>
         <p class="meta">앱을 다시 켜야 하나요? {restartNote}</p>
       </div>
@@ -60,19 +60,24 @@ const oses = [
 </section>
 
 <style>
+  .tabs[hidden] { display: none; }
   .tabs { display: flex; gap: 8px; margin-bottom: 24px; }
   .tab {
-    min-height: 44px; padding: 0 20px; border: 1px solid var(--border); border-radius: var(--radius);
+    min-height: 44px; padding: 0 20px; border: 1px solid var(--border); border-radius: 12px;
     background: var(--surface); color: var(--text); font: inherit; cursor: pointer;
   }
   .tab[aria-pressed='true'] { background: var(--text); color: #fff; border-color: var(--text); font-weight: 700; }
-  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: flex; flex-direction: column; gap: 24px; }
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: flex; flex-direction: column; gap: 32px; }
   .steps > li { display: flex; gap: 16px; counter-increment: step; }
   .steps > li::before {
     content: counter(step); flex: none; width: 32px; height: 32px; border-radius: 50%;
-    background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); color: var(--accent-hover); font-weight: 700; display: flex; align-items: center; justify-content: center;
   }
   .steps > li > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .steps > li > p { min-width: 0; }
+  summary { font-weight: 700; cursor: pointer; min-height: 44px; }
+  details > p { margin-top: 8px; }
+  h3 { font-size: 17px; }
   .os-panel[hidden] { display: none; }
   code { font-family: var(--mono); font-size: 14px; }
   kbd { font-family: var(--mono); font-size: 14px; padding: 1px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
@@ -81,6 +86,8 @@ const oses = [
 </style>
 
 <script>
+  document.querySelectorAll<HTMLElement>('.tabs[hidden]').forEach((group) => { group.hidden = false; });
+  document.querySelectorAll<HTMLElement>('[data-os-panel="windows"]').forEach((panel) => { panel.hidden = true; });
   const tabs = document.querySelectorAll<HTMLButtonElement>('[data-os]');
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
