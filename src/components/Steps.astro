@@ -1,6 +1,6 @@
 ---
 import CodeBox from './CodeBox.astro';
-import { installPaths, restartNote } from '../data/install.js';
+import { mac, restartNote, PENDING } from '../data/install.js';
 
 const { skill } = Astro.props;
 const oses = [
@@ -17,25 +17,42 @@ const oses = [
   </div>
   <ol class="steps">
     <li>
-      <div><strong>파일을 받습니다.</strong> 위의 '스킬 파일 다운로드' 버튼을 누르세요.</div>
+      <p><strong>파일을 받습니다.</strong> 위의 '스킬 파일 다운로드' 버튼을 누르세요. 파일은 보통 '다운로드' 폴더에 저장됩니다.</p>
     </li>
     <li>
-      <div><strong>압축을 풉니다.</strong> <code>{skill.id}</code> 폴더가 나옵니다.</div>
+      <p><strong>압축을 풉니다.</strong> 받은 ZIP 파일을 두 번 누르면 <code>{skill.id}</code> 폴더가 나옵니다.</p>
     </li>
     <li>
       <div>
-        <strong>폴더를 아래 위치에 넣습니다.</strong>
-        {oses.map((o, i) => (
-          <div class="os-panel" data-os-panel={o.key} hidden={i !== 0}>
-            <CodeBox text={installPaths[o.key]} />
+        <p><strong>폴더를 스킬 폴더에 넣습니다.</strong></p>
+        <div class="os-panel" data-os-panel="mac">
+          <p>스킬 폴더는 <code>.claude</code>라는 <em>숨김 폴더</em> 안에 있어서 Finder에 평소에는 보이지 않습니다. 보이지 않는 것이 정상입니다. 아래 방법으로 바로 열 수 있습니다.</p>
+          <ol class="sub">
+            <li>Finder를 열고 맨 위 메뉴에서 <strong>이동 → 폴더로 이동</strong>을 누릅니다. (키보드: <kbd>{mac.goToFolderKeys}</kbd>)</li>
+            <li>입력창에 아래 글자를 붙여넣고 Enter를 누릅니다.<CodeBox text={mac.skillsDir} /></li>
+            <li><strong>폴더가 열렸다면:</strong> 2번에서 압축을 푼 <code>{skill.id}</code> 폴더를 이 창으로 끌어다 놓습니다. 이미 스킬을 쓰고 계셨던 분은 다른 스킬 폴더들이 같이 보입니다.</li>
+            <li><strong>같은 이름의 폴더가 이미 있다면:</strong> '바꾸기'를 누르면 새 파일로 교체됩니다.</li>
+          </ol>
+          <div class="box warn">
+            <strong>"폴더를 찾을 수 없습니다"라고 나온다면</strong>
+            <p>Claude를 처음 쓰시는 분은 이 폴더가 아직 없습니다. 만들어 주면 됩니다.</p>
+            <ol class="sub">
+              <li><strong>터미널</strong> 앱을 엽니다. (<kbd>⌘ + Space</kbd>를 누르고 '터미널'을 입력)</li>
+              <li>아래 한 줄을 붙여넣고 Enter를 누릅니다. 화면에 아무 말이 없으면 잘 된 것입니다.<CodeBox text={mac.makeDirCommand} /></li>
+              <li>위의 1번부터 다시 따라 합니다.</li>
+            </ol>
           </div>
-        ))}
+          <p class="meta">보이지 않는 파일을 Finder에서 보려면 <kbd>{mac.showHiddenKeys}</kbd>를 누르세요. 다시 누르면 숨겨집니다.</p>
+        </div>
+        <div class="os-panel" data-os-panel="windows" hidden>
+          <p class="meta">윈도우 안내는 준비 중입니다. {PENDING}</p>
+        </div>
         <p class="meta">앱을 다시 켜야 하나요? {restartNote}</p>
       </div>
     </li>
     <li>
       <div>
-        <strong>Claude에서 실행합니다.</strong> 아래처럼 입력하세요.
+        <p><strong>Claude에서 실행합니다.</strong> 아래처럼 입력하세요.</p>
         <CodeBox text={skill.command} />
       </div>
     </li>
@@ -50,14 +67,17 @@ const oses = [
   }
   .tab[aria-pressed='true'] { background: var(--text); color: #fff; border-color: var(--text); font-weight: 700; }
   .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: flex; flex-direction: column; gap: 24px; }
-  .steps li { display: flex; gap: 16px; counter-increment: step; }
-  .steps li::before {
+  .steps > li { display: flex; gap: 16px; counter-increment: step; }
+  .steps > li::before {
     content: counter(step); flex: none; width: 32px; height: 32px; border-radius: 50%;
     background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center;
   }
-  .steps li > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .steps > li > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
   .os-panel[hidden] { display: none; }
   code { font-family: var(--mono); font-size: 14px; }
+  kbd { font-family: var(--mono); font-size: 14px; padding: 1px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+  .sub { margin: 8px 0 16px; padding-left: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .os-panel .box { margin: 16px 0; padding: 16px; }
 </style>
 
 <script>
