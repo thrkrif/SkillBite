@@ -1,0 +1,21 @@
+---
+const { text, block = false } = Astro.props;
+---
+<div class="code">
+  <code>{text}</code>
+  <button class="copy" type="button" aria-label="복사" data-copy={text}>복사</button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy ?? '');
+        btn.textContent = '복사됨';
+        setTimeout(() => (btn.textContent = '복사'), 1500);
+      } catch {
+        btn.textContent = '직접 선택해 주세요';
+      }
+    });
+  });
+</script>
