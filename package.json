@@ -4,11 +4,20 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
-    "lint:branch": "bash scripts/check-branch-name.sh"
+    "lint:branch": "bash scripts/check-branch-name.sh",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "zip": "node scripts/build-zip.mjs"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
-    "husky": "^9.1.7"
+    "@commitlint/cli": "19.8.0",
+    "@commitlint/config-conventional": "19.8.0",
+    "husky": "9.1.7"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "astro": "6.4.8",
+    "pretendard": "1.3.9"
   }
 }

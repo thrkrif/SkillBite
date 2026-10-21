@@ -1,0 +1,32 @@
+---
+const { skill } = Astro.props;
+---
+<a class="card" href={`/skills/${skill.id}`} data-category={skill.category}>
+  <span class="icon" aria-hidden="true"><img src={skill.icon} alt="" width="28" height="28" /></span>
+  <span class="title">{skill.title}</span>
+  <span class="summary">{skill.summary}</span>
+  <span class="tags">
+    {skill.tags.slice(0, 2).map((t) => <span class="chip">{t}</span>)}
+  </span>
+</a>
+
+<style>
+  .card {
+    display: flex; flex-direction: column; gap: 8px; min-height: 200px; height: 100%; padding: 24px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    color: var(--text); text-decoration: none;
+  }
+  .card[hidden] { display: none; }
+  .card:hover, .card:focus-visible { border-color: var(--accent); }
+  .card:hover .title, .card:focus-visible .title { color: var(--accent); }
+  .icon {
+    display: flex; align-items: center; justify-content: center; width: 48px; height: 48px;
+    border-radius: var(--radius); background: #eef3ff; margin-bottom: 4px;
+  }
+  .title { font-size: 18px; font-weight: 700; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .summary {
+    font-size: 15px; color: var(--text-sub); line-height: 1.6;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px; }
+</style>

@@ -1,0 +1,73 @@
+---
+import CodeBox from './CodeBox.astro';
+import { installPaths, restartNote } from '../data/install.js';
+
+const { skill } = Astro.props;
+const oses = [
+  { key: 'mac', label: '맥' },
+  { key: 'windows', label: '윈도우' },
+];
+---
+<section class="section">
+  <h2>설치 4단계</h2>
+  <div class="tabs" role="group" aria-label="운영체제">
+    {oses.map((o, i) => (
+      <button class="tab" type="button" data-os={o.key} aria-pressed={String(i === 0)}>{o.label}</button>
+    ))}
+  </div>
+  <ol class="steps">
+    <li>
+      <div><strong>파일을 받습니다.</strong> 위의 '스킬 파일 다운로드' 버튼을 누르세요.</div>
+    </li>
+    <li>
+      <div><strong>압축을 풉니다.</strong> <code>{skill.id}</code> 폴더가 나옵니다.</div>
+    </li>
+    <li>
+      <div>
+        <strong>폴더를 아래 위치에 넣습니다.</strong>
+        {oses.map((o, i) => (
+          <div class="os-panel" data-os-panel={o.key} hidden={i !== 0}>
+            <CodeBox text={installPaths[o.key]} />
+          </div>
+        ))}
+        <p class="meta">앱을 다시 켜야 하나요? {restartNote}</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Claude에서 실행합니다.</strong> 아래처럼 입력하세요.
+        <CodeBox text={skill.command} />
+      </div>
+    </li>
+  </ol>
+</section>
+
+<style>
+  .tabs { display: flex; gap: 8px; margin-bottom: 24px; }
+  .tab {
+    min-height: 44px; padding: 0 20px; border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--surface); color: var(--text); font: inherit; cursor: pointer;
+  }
+  .tab[aria-pressed='true'] { background: var(--text); color: #fff; border-color: var(--text); font-weight: 700; }
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: flex; flex-direction: column; gap: 24px; }
+  .steps li { display: flex; gap: 16px; counter-increment: step; }
+  .steps li::before {
+    content: counter(step); flex: none; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  }
+  .steps li > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .os-panel[hidden] { display: none; }
+  code { font-family: var(--mono); font-size: 14px; }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-os]');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.setAttribute('aria-pressed', String(t === tab)));
+      document.querySelectorAll<HTMLElement>('[data-os-panel]').forEach((p) => {
+        p.hidden = p.dataset.osPanel !== tab.dataset.os;
+      });
+    });
+  });
+</script>
