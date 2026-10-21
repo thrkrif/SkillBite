@@ -23,7 +23,10 @@
 
 ## Git 규칙 (Git Flow)
 - 상시 브랜치: `main`(배포), `dev`(통합). 작업 브랜치는 `dev`에서 따서 `dev`로 PR한다.
-- 브랜치명: `feature/*` 기능 개발, `release/*` 배포 준비·안정화(`dev`에서 분기, `main`으로 머지), `hotfix/*` 운영 긴급 수정(`main`에서 분기, `main`과 `dev`에 머지). 소문자·숫자·`.`·`_`·`-`만 쓴다.
+- 브랜치명: `<접두사>/<설명>`. 소문자·숫자·`.`·`_`·`-`만 쓴다.
+  - `feature/*`(`feat/*`) 기능 개발, `bugfix/*`(`fix/*`) 버그 수정, `chore/*` 설정·의존성 등 잡무, `docs/*` 문서, `refactor/*` 동작 변경 없는 정리, `test/*` 테스트, `perf/*` 성능, `style/*` 서식, `build/*` 빌드, `ci/*` CI. 모두 `dev`에서 따서 `dev`로 PR한다.
+  - `release/*` 배포 준비·안정화(`dev`에서 분기, `main`으로 머지), `hotfix/*` 운영 긴급 수정(`main`에서 분기, `main`과 `dev`에 머지).
+  - `main`과 `dev`는 직접 push할 수 없고 PR로만 변경한다.
 - 커밋 메시지: `type: 제목` (Conventional Commits). type은 `feat` `fix` `docs` `style` `refactor` `perf` `test` `build` `ci` `chore` `revert`. 예: `feat: 스킬 카드 목록 추가`
 - 검사: 로컬은 husky(`commit-msg`, `pre-commit`, `pre-push`), 원격은 `.github/workflows/lint.yml`(PR 시 브랜치명·커밋 메시지). 규칙은 `scripts/check-branch-name.sh`, `commitlint.config.js`에 있다.
 - `--no-verify`로 검사를 우회하지 않는다.
