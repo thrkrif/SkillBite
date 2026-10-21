@@ -1,20 +1,28 @@
 ---
-const { text, block = false } = Astro.props;
+const { text } = Astro.props;
 ---
-<div class="code">
-  <code>{text}</code>
-  <button class="copy" type="button" aria-label="복사" data-copy={text}>복사</button>
+<div class="copy-group">
+  <div class="code"><code>{text}</code><button class="copy" type="button" data-copy={text} hidden>복사</button></div>
+  <span class="copy-status" role="status" aria-live="polite"></span>
 </div>
-
+<style>
+  button[hidden] { display: none; }
+  .copy-group { min-width: 0; }
+  .copy-status { display: block; color: var(--text-mute); font-size: 14px; }
+  .copy-status:empty { display: none; }
+  .copy-status:not(:empty) { margin-top: 8px; }
+</style>
 <script>
   document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+    btn.hidden = false;
     btn.addEventListener('click', async () => {
+      const status = btn.closest('.copy-group')?.querySelector<HTMLElement>('.copy-status');
+      if (!status) return;
       try {
         await navigator.clipboard.writeText(btn.dataset.copy ?? '');
-        btn.textContent = '복사됨';
-        setTimeout(() => (btn.textContent = '복사'), 1500);
+        status.textContent = '복사했어요';
       } catch {
-        btn.textContent = '직접 선택해 주세요';
+        status.textContent = '복사하지 못했어요. 위 글자를 직접 선택해 복사해 주세요.';
       }
     });
   });
