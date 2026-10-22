@@ -4,7 +4,7 @@ import '@fontsource/jetbrains-mono/400.css';
 import '../styles/global.css';
 import { feedbackUrl } from '../data/install.js';
 
-const { title = 'Skillbite — 파일 하나로 시작하는 AI 활용', description = 'AI에게 일하는 방법을 알려주는 지침 파일, 스킬을 골라 Claude에 추가해 보세요.', narrow = false } = Astro.props;
+const { title = 'SkillBite — 파일 하나로 시작하는 AI 활용', description = 'AI에게 일하는 방법을 알려주는 지침 파일, 스킬을 골라 Claude에 추가해 보세요.', narrow = false } = Astro.props;
 const isHome = Astro.url.pathname === '/';
 ---
 <!doctype html>
@@ -19,7 +19,7 @@ const isHome = Astro.url.pathname === '/';
     <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
     <header class="site-header">
       <div class="container header-inner">
-        <a class="brand" href="/" aria-label="Skillbite 홈"><span class="brand-text">SkillBite<span class="brand-ko" lang="ko">스킬바이트</span></span></a>
+        <a class="brand" href="/" aria-label="SkillBite 홈"><span class="brand-text">SkillBite<span class="brand-ko" lang="ko">스킬바이트</span></span></a>
         <nav class="site-nav" aria-label="주 메뉴">
           <a href="/#skills" aria-current={isHome ? 'page' : undefined}>스킬 둘러보기</a>
           <a href="/#how-it-works">사용 방법</a>
@@ -34,7 +34,7 @@ const isHome = Astro.url.pathname === '/';
     <footer class="site-footer">
       <div class="container footer-inner">
         <div>
-          <p class="footer-brand">Skillbite</p>
+          <p class="footer-brand">SkillBite</p>
           <p class="meta">AI와 함께 더 나은 일을 하는 작은 도구들을 모읍니다.</p>
         </div>
         <nav class="footer-links" aria-label="하단 메뉴">

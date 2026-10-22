@@ -16,7 +16,7 @@ const { skill } = Astro.props;
 const file = `skills/${skill.id}/SKILL.md`;
 const preview = existsSync(file) ? readFileSync(file, 'utf-8').split('\n').slice(0, 14).join('\n') : '';
 ---
-<Base title={`${skill.title} | Skillbite`} description={skill.summary} narrow>
+<Base title={`${skill.title} | SkillBite`} description={skill.summary} narrow>
   <a class="back" href="/#skills">← 스킬 목록으로</a>
   <header class="head">
     <span class="icon-surface detail-icon" aria-hidden="true"><img src={skill.icon} alt="" width="36" height="36" /></span>
