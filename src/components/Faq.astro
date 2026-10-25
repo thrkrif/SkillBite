@@ -10,7 +10,7 @@ const { faqs } = Astro.props;
   .item + .item { border-top: 1px solid var(--border-soft); }
   summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 16px 24px; list-style: none; font-size: 16px; font-weight: 600; cursor: pointer; }
   summary::-webkit-details-marker { display: none; }
-  details[open] summary { color: var(--accent-hover); }
+  details[open] summary { color: var(--text); }
   .indicator { font-size: 20px; flex: none; }
   details[open] .indicator { font-size: 0; }
   details[open] .indicator::after { content: '−'; font-size: 20px; }
