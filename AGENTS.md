@@ -48,6 +48,8 @@
 | `docs/TASKS.md` | 단계별 체크리스트 |
 | `docs/SKILL_SPEC.md` | `blog-writer-naver` 스킬 파일 기준 |
 | `docs/CONTENT_AND_TEST.md` | 스크린샷·영상 명세, 친구 테스트 계획 |
+| `docs/brand-brief.md` | 로고 브리프(성격, 색, 금지 사항) |
+| `docs/design/ui-overhaul/PLAN.md` | 프론트 개편 계획, 절차, 리뷰 기준표(진행 기록은 같은 폴더 `LOG.md`) |
 
 ## 작업 순서
 `docs/TASKS.md`의 3단계(사이트 구현)부터 진행한다. 화면 프로토타입은 별도 Design 문서(링크는 사용자에게 문의)가 있고, 목록(`/`)과 상세(`/skills/:id`) 2화면이다.
