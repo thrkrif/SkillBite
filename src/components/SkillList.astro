@@ -58,7 +58,7 @@ const showTools = showFilter || showSearch;
   .filters { display: flex; flex-wrap: wrap; gap: 8px; align-self: flex-end; }
   .filter { min-height: 44px; padding: 0 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 15px; cursor: pointer; }
   .filter:hover { border-color: var(--text); }
-  .filter[aria-pressed='true'] { background: var(--accent); border-color: var(--text); font-weight: 700; }
+  .filter[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 700; }
   .list { margin: 0; padding: 0; list-style: none; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
   .note { margin-top: 16px; color: var(--text-mute); font-size: 15px; }
   .no-result { padding: 24px; border: 1px dashed var(--border); border-radius: var(--radius); }
