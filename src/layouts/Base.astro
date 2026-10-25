@@ -6,6 +6,9 @@ import { feedbackUrl } from '../data/install.js';
 
 const { title = 'SkillBite — 파일 하나로 시작하는 AI 활용', description = 'AI에게 일하는 방법을 알려주는 지침 파일, 스킬을 골라 Claude에 추가해 보세요.', narrow = false } = Astro.props;
 const isHome = Astro.url.pathname === '/';
+// 공개 주소(astro.config의 site)가 정해지면 canonical과 공유 이미지 주소가 자동으로 붙는다. 현재 주소는 [확인 필요].
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : null;
+const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : null;
 ---
 <!doctype html>
 <html lang="ko">
@@ -19,6 +22,15 @@ const isHome = Astro.url.pathname === '/';
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#F5C842" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SkillBite" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
     <title>{title}</title>
   </head>
   <body>
@@ -41,7 +53,7 @@ const isHome = Astro.url.pathname === '/';
       <div class="container footer-inner">
         <div>
           <p class="footer-brand"><img class="footer-logo" src="/logo.svg" alt="SkillBite" width="105" height="30" /></p>
-          <p class="meta">AI와 함께 더 나은 일을 하는 작은 도구들을 모읍니다.</p>
+          <p class="meta">비개발자를 위한 Claude 스킬 파일을 모아 둔 곳이에요.</p>
         </div>
         <nav class="footer-links" aria-label="하단 메뉴">
           <a href="/#skills">스킬 둘러보기</a>

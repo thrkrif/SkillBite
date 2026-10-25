@@ -13,7 +13,7 @@ repo/
 │  └─ video/ (설치 쇼츠)
 ├─ src/
 │  ├─ data/skills.json
-│  ├─ components/ (SkillCard, SkillGrid, SafetyBox, Steps, FeatureTable, Faq ...)
+│  ├─ components/ (SkillRow, SkillList, SafetyBox, Steps, FeatureTable, Faq ...)
 │  └─ pages/
 │     ├─ index        (목록 /)
 │     └─ skills/[id]  (상세 /skills/:id)
