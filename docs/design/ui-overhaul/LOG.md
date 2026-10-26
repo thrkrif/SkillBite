@@ -58,4 +58,4 @@
 - 안심 상자(`SafetyBox`) 문장을 세 줄로 나눔.
 - `skills.json`: 태그 `쉬움`(주관적 표현) 삭제, `브라우저 필요`를 `네이버 로그인 필요`로 변경(목록에서 보이는 조건은 사용자가 하는 행동이어야 함). 명령어는 `/blog-writer-naver [내용]`. `capabilities` 문구를 `글 초안 작성 (대화창에 출력)` / `네이버 블로그에 자동 입력·게시`로 명확히 함.
 - 문서 갱신: `DESIGN.md`(소개, 분류 예시, 필터 기준 4개), `HANDOFF.md`(스키마 예시), `PRD.md`, `SKILL_SPEC.md`(명령어 표기).
-- 확인 필요: 내려받는 `SKILL.md` 안의 표현은 아직 `주제`입니다. 사이트 표기(`[내용]`)와 맞출지 정해야 합니다.
+- 내려받는 `SKILL.md`와 ZIP의 `주제` 표현도 `내용`으로 통일함(`skills/blog-writer-naver/SKILL.md`, `npm run zip`).
