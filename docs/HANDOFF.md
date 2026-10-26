@@ -27,11 +27,11 @@ repo/
 {
   "id": "blog-writer-naver",
   "title": "네이버 블로그 글 자동 작성",
-  "summary": "주제만 입력하면 블로그 글을 쓰고 게시까지 도와줍니다",
+  "summary": "내용만 입력하면 블로그 글을 쓰고 게시까지 도와줍니다",
   "icon": "/icons/blog-writer-naver.svg",
   "category": "글쓰기",
-  "tags": ["쉬움", "브라우저 필요"],
-  "command": "/blog-writer-naver 주제",
+  "tags": ["네이버 로그인 필요"],
+  "command": "/blog-writer-naver [내용]",
   "downloadUrl": "/downloads/blog-writer-naver.zip",
   "requirements": ["Claude 유료 요금제", "Claude 데스크톱 앱 또는 터미널", "Claude in Chrome 등 브라우저 제어 도구"],
   "capabilities": [
