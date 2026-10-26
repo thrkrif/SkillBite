@@ -1,0 +1,98 @@
+---
+import SkillRow from './SkillRow.astro';
+
+const { skills } = Astro.props;
+
+// 스킬이 적을 때는 탐색 도구를 숨기고, 데이터가 늘면 같은 자리에서 나타난다.
+const FILTER_MIN_SKILLS = 4;
+const SEARCH_MIN_SKILLS = 8;
+
+const categories = [...new Set(skills.map((skill) => skill.category))];
+const showFilter = skills.length >= FILTER_MIN_SKILLS && categories.length >= 2;
+const showSearch = skills.length >= SEARCH_MIN_SKILLS;
+const showTools = showFilter || showSearch;
+---
+<div data-skill-catalog data-total={skills.length}>
+  <div class="toolbar">
+    <p class="count meta" data-count aria-live="polite">전체 {skills.length}개</p>
+    {showTools && (
+      <div class="tools" hidden data-tools>
+        {showSearch && (
+          <div class="search">
+            <label for="skill-search">스킬 검색</label>
+            <input id="skill-search" type="search" placeholder="예: 블로그, 보고서" autocomplete="off" data-search-input />
+          </div>
+        )}
+        {showFilter && (
+          <div class="filters" role="group" aria-label="업무 종류">
+            <button class="filter" type="button" data-filter="" aria-pressed="true">전체</button>
+            {categories.map((category) => <button class="filter" type="button" data-filter={category} aria-pressed="false">{category}</button>)}
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+
+  {skills.length === 0 ? (
+    <p class="note">준비된 스킬이 아직 없어요.</p>
+  ) : (
+    <ul class="list">
+      {skills.map((skill) => <SkillRow skill={skill} />)}
+    </ul>
+  )}
+
+  <div class="no-result" hidden data-no-result>
+    <p>찾는 스킬이 없어요. 검색어를 바꾸거나 종류를 다시 골라 보세요.</p>
+    <button type="button" data-reset>조건 지우기</button>
+  </div>
+  {!showTools && <p class="note">새 스킬은 준비되는 대로 이곳에 추가돼요.</p>}
+</div>
+
+<style>
+  .toolbar { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+  .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .search { flex: 1 1 18rem; max-width: 26rem; }
+  .search label { display: block; margin-bottom: 4px; color: var(--text-sub); font-size: 14px; font-weight: 600; }
+  .search input { width: 100%; min-height: 48px; padding: 0 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font: inherit; font-size: 16px; }
+  .search input:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-self: flex-end; }
+  .filter { min-height: 44px; padding: 0 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 15px; cursor: pointer; }
+  .filter:hover { border-color: var(--text); }
+  .filter[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 700; }
+  .list { margin: 0; padding: 0; list-style: none; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .note { margin-top: 16px; color: var(--text-mute); font-size: 15px; }
+  .no-result { padding: 24px; border: 1px dashed var(--border); border-radius: var(--radius); }
+  .no-result button { min-height: 44px; margin-top: 8px; padding: 0; border: 0; background: none; color: var(--text); font: inherit; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-skill-catalog]').forEach((catalog) => {
+    const tools = catalog.querySelector<HTMLElement>('[data-tools]');
+    if (!tools) return;
+    tools.hidden = false;
+    const total = Number(catalog.dataset.total);
+    const input = catalog.querySelector<HTMLInputElement>('[data-search-input]');
+    const buttons = catalog.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const items = catalog.querySelectorAll<HTMLElement>('.item');
+    const count = catalog.querySelector<HTMLElement>('[data-count]');
+    const empty = catalog.querySelector<HTMLElement>('[data-no-result]');
+    let category = '';
+
+    const apply = () => {
+      const query = (input?.value ?? '').trim().toLowerCase();
+      let visible = 0;
+      buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === category)));
+      items.forEach((item) => {
+        const match = (!category || item.dataset.category === category) && (!query || (item.dataset.search ?? '').includes(query));
+        item.hidden = !match;
+        if (match) visible++;
+      });
+      if (count) count.textContent = visible === total ? `전체 ${total}개` : `${total}개 중 ${visible}개`;
+      if (empty) empty.hidden = visible > 0;
+    };
+
+    buttons.forEach((button) => button.addEventListener('click', () => { category = button.dataset.filter ?? ''; apply(); }));
+    input?.addEventListener('input', apply);
+    catalog.querySelector('[data-reset]')?.addEventListener('click', () => { category = ''; if (input) input.value = ''; apply(); });
+  });
+</script>

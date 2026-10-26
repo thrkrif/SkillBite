@@ -1,123 +1,63 @@
 ---
 import Base from '../layouts/Base.astro';
-import SkillGrid from '../components/SkillGrid.astro';
+import SkillList from '../components/SkillList.astro';
 import skills from '../data/skills.json';
 
 const steps = [
-  { title: '파일 받기', text: '원하는 스킬의 파일을 다운로드합니다.' },
-  { title: 'Claude에 추가', text: '다운로드한 스킬 폴더를 안내에 따라 넣어주세요.' },
-  { title: '명령어 입력', text: 'Claude에서 안내된 명령어를 입력해 사용합니다.' },
+  { title: '파일 받기', text: '고른 스킬 페이지에서 파일을 내려받아요.' },
+  { title: '지정된 위치로 옮기기', text: '다운받은 스킬 파일을 Claude가 인식할 수 있는 위치로 옮깁니다. 위치와 방법은 스킬 페이지에 단계별로 있어요.' },
+  { title: '명령어 입력', text: 'Claude에 /스킬 이름과 [내용]을 입력하면 자동화를 시작해요.' },
 ];
 ---
 <Base>
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-copy">
-      <p class="eyebrow">개발자가 아니어도 시작하는 업무 자동화</p>
-      <h1 id="hero-title">업무 자동화,<br />어렵게 생각하지 마세요.</h1>
-      <p class="hero-description">개발자가 아니어도 <b>파일 하나</b>로 업무 자동화를 시작해 보세요.<br />
-        Skillbite는 AI 사용이 익숙하지 않은 분들을 위하여 쉬운 가이드를 제공합니다.</p>
-      <p class="meta hero-meta">무료 다운로드 · 가입 없이 이용</p>
-    </div>
-    <div class="hero-guide" aria-label="SKILL.md 파일을 Claude에 추가하고 명령어를 입력해 사용합니다">
-      <div class="document" aria-hidden="true">
-        <span class="fold"></span>
-        <span class="document-name">SKILL.md</span>
-        <span class="document-line"></span>
-        <span class="document-line short"></span>
-      </div>
-      <svg class="guide-arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7" /></svg>
-      <p aria-hidden="true">Claude에 추가<br /><span>→ 명령어 입력</span></p>
-    </div>
-  </section>
-
-  <section class="skill-intro" aria-labelledby="skill-intro-title">
-    <div class="section-heading">
-      <h2 id="skill-intro-title">스킬이 뭔가요?</h2>
-      <p>AI에게 건네는 <b>업무 안내서</b>입니다.</p>
-    </div>
-    <div class="skill-intro-description">
-      <p>스킬은 <strong>AI에게 일하는 방법을 알려주는 글자로 된 파일</strong>입니다. Skillbite에서 받는 스킬의 핵심은 <strong>SKILL.md 파일 하나</strong>예요. 열어보면 어떤 일을, 어떤 순서로 해야 하는지 쉬운 말로 적혀 있습니다.</p>
-      <p>예를 들어, 블로그 글쓰기 스킬에는 제목을 짓고 본문을 구성하는 방법 등이 담겨 있어요.<br />
-        Claude가 읽을 수 있는 위치에 파일을 저장하면, 해당 스킬을 사용할 수 있습니다.</p>
-      <p>파일 자체가 일을 실행하지는 않아요. Claude가 파일에 담긴 안내를 읽고 일을 시작합니다.</p>
-    </div>
+  <section class="intro" aria-labelledby="intro-title">
+    <h1 id="intro-title">반복되는 업무,<br />파일 하나로 시작하세요.</h1>
+    <p class="intro-text">자동화를 어렵게 생각하지 마세요.<br />
+      스킬은 AI에게 일하는 방법을 알려주는 파일이에요. <br>
+      지정된 위치에 파일을 저장하면, Claude가 글 초안을 만들어 줘요.<br />
+    </p>
+    <p class="intro-cost">스킬 파일은 무료이고 가입도 필요 없어요. 다만 Claude 유료 구독은 따로 필요해요.</p>
   </section>
 
   <section class="catalog" id="skills" aria-labelledby="skills-title">
-    <div class="section-heading">
-      <h2 id="skills-title">어떤 일을 도와드릴까요?</h2>
-      <p>필요한 스킬을 골라 자세히 살펴보세요.</p>
-    </div>
-    <p class="meta skill-count">스킬 {skills.length}개</p>
-    <SkillGrid skills={skills} />
+    <h2 id="skills-title">어떤 일을 도와드릴까요?</h2>
+    <SkillList skills={skills} />
   </section>
 
   <section class="how-it-works" id="how-it-works" aria-labelledby="how-title">
     <h2 id="how-title">처음이라도, 순서대로 따라오세요.</h2>
-    <ol class="overview-steps">
+    <ol class="steps">
       {steps.map((step, index) => (
         <li>
-          <span class="step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-          <div><h3>{step.title}</h3><p>{step.text}</p></div>
+          <span class="step-number" aria-hidden="true">{index + 1}</span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
         </li>
       ))}
     </ol>
-    <p class="meta subscription-note">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v6m0 3v1" /></svg>
-      Claude 유료 구독이 필요합니다. 자세한 준비물과 설치 안내는 각 스킬에서 확인해 주세요.
-    </p>
   </section>
 </Base>
 
 <style>
-  .hero { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: 40px; padding-block: 64px; }
-  .hero h1 { margin-top: 16px; font-size: 56px; line-height: 1.18; letter-spacing: -.04em; }
-  .hero-description { margin-top: 24px; color: var(--text-sub); }
-  .hero-meta { margin-top: 24px; }
-  .hero-guide { display: flex; justify-content: center; align-items: center; gap: 24px; min-height: 280px; padding: 32px 24px; background: var(--accent-soft); border-radius: 24px; color: var(--text); }
-  .hero-guide > p { font-size: 18px; font-weight: 600; line-height: 1.6; word-break: keep-all; }
-  .document { position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; flex: none; width: 112px; height: 160px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; clip-path: polygon(0 0, 72% 0, 100% 20%, 100% 100%, 0 100%); }
-  .fold { position: absolute; right: 0; top: 0; width: 32px; height: 32px; background: var(--surface-soft); border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .document-name { margin-bottom: 4px; color: var(--text-sub); font-size: 14px; font-weight: 700; }
-  .document-line { width: 100%; height: 4px; background: var(--border); border-radius: 999px; }
-  .document-line.short { width: 60%; }
-  .guide-arrow { flex: none; color: var(--accent-hover); }
-  .skill-intro { padding-block: 40px; border-top: 1px solid var(--border); }
-  .skill-intro-description { max-width: 68ch; margin-top: 24px; color: var(--text-sub); }
-  .skill-intro-description p + p { margin-top: 16px; }
-  .skill-intro-description strong { color: var(--text); }
-  .catalog { padding-top: 40px; border-top: 1px solid var(--border); }
-  .section-heading p { margin-top: 8px; color: var(--text-sub); }
-  .skill-count { margin-block: 24px 12px; }
-  .how-it-works { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--border); }
-  .overview-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; list-style: none; margin: 24px 0; padding: 0; }
-  .overview-steps li { display: flex; gap: 16px; }
-  .overview-steps li + li { padding-left: 24px; border-left: 1px solid var(--border); }
-  .step-number { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-hover); font-size: 16px; font-weight: 700; }
-  .overview-steps h3 { font-size: 18px; }
-  .overview-steps p { margin-top: 8px; color: var(--text-sub); font-size: 15px; line-height: 1.6; }
-  .subscription-note { display: flex; align-items: flex-start; gap: 8px; }
-  .subscription-note svg { flex: none; margin-top: 4px; }
-  @media (min-width: 640px) and (max-width: 1023px) {
-    .hero { grid-template-columns: 1fr; gap: 32px; padding-block: 48px; }
-    .hero-guide { min-height: 200px; }
-    .overview-steps li { flex-direction: column; }
-    .overview-steps li + li { padding-left: 16px; }
+  .intro { max-width: 46rem; padding-block: 72px 56px; }
+  .intro h1 { font-size: 52px; line-height: 1.2; letter-spacing: -.04em; text-wrap: balance; }
+  .intro-text { max-width: 36rem; margin-top: 24px; color: var(--text-sub); font-size: 18px; line-height: 1.75; word-break: keep-all; text-wrap: pretty; }
+  .intro-cost { max-width: 36rem; margin-top: 12px; color: var(--text); font-size: 16px; font-weight: 600; line-height: 1.7; word-break: keep-all; }
+  .catalog h2, .how-it-works h2 { margin-bottom: 20px; font-size: 24px; letter-spacing: -.03em; }
+  .how-it-works { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); }
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 0; list-style: none; }
+  .steps li { padding-top: 16px; border-top: 2px solid var(--text); }
+  .step-number { display: block; margin-bottom: 8px; color: var(--text-mute); font-size: 14px; font-weight: 700; }
+  .steps h3 { font-size: 18px; letter-spacing: -.02em; }
+  .steps p { margin-top: 8px; color: var(--text-sub); font-size: 15px; line-height: 1.65; word-break: keep-all; }
+  @media (max-width: 859px) and (min-width: 600px) { .steps { gap: 24px; } }
+  @media (max-width: 859px) {
+    .intro { padding-block: 48px 40px; }
+    .intro h1 { font-size: 38px; }
+    .intro-text { font-size: 17px; }
+    .how-it-works { margin-top: 56px; }
   }
-  @media (max-width: 639px) {
-    .hero { grid-template-columns: 1fr; padding-block: 40px; gap: 24px; }
-    .hero h1 { font-size: 36px; line-height: 1.25; letter-spacing: -.03em; }
-    .hero-description { margin-top: 20px; }
-    .desktop-break { display: none; }
-    .hero-meta { margin-top: 16px; }
-    .hero-guide { min-height: 160px; padding: 24px; gap: 24px; }
-    .document { width: 80px; height: 112px; padding: 12px; }
-    .fold { width: 24px; height: 24px; }
-    .hero-guide > p { font-size: 16px; }
-    .skill-intro { padding-block: 32px; }
-    .catalog { padding-top: 32px; }
-    .how-it-works { margin-top: 40px; padding-top: 32px; }
-    .overview-steps { grid-template-columns: 1fr; gap: 24px; }
-    .overview-steps li + li { padding-left: 0; border-left: 0; }
+  @media (max-width: 599px) {
+    .steps { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   }
 </style>

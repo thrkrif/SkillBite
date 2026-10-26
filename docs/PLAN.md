@@ -1,4 +1,4 @@
-# PLAN — Skillbite MVP
+# PLAN — SkillBite MVP
 
 **한 줄 정의**: 비개발자가 "스킬 파일 1개 다운로드 → `/스킬이름` 실행"만으로 Claude의 확장 기능을 처음 경험하게 하는 정적 사이트.
 
