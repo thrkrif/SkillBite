@@ -7,7 +7,7 @@ React + Vite (또는 Astro), 정적 빌드, Cloudflare Pages 배포. 백엔드·
 ```text
 repo/
 ├─ public/
-│  ├─ downloads/ (blog-writer-naver·velog·tistory .zip)
+│  ├─ downloads/ (스킬별 .zip)
 │  ├─ icons/ (스킬 카드 아이콘 SVG)
 │  ├─ images/ (예시 결과물, 설치 스크린샷)
 │  └─ video/ (설치 쇼츠)
@@ -17,7 +17,7 @@ repo/
 │  └─ pages/
 │     ├─ index        (목록 /)
 │     └─ skills/[id]  (상세 /skills/:id)
-└─ skills/<id>/SKILL.md   ← 배포 원본 (blog-writer-naver, -velog, -tistory)
+└─ skills/<id>/SKILL.md   ← 배포 원본 (blog-writer-naver·velog·tistory, doc-writer-word·hangul)
 ```
 
 ## 스킬 데이터 스키마 (`skills.json`)
