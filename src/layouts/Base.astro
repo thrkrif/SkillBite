@@ -4,7 +4,7 @@ import '@fontsource/jetbrains-mono/400.css';
 import '../styles/global.css';
 import { feedbackUrl } from '../data/install.js';
 
-const { title = 'SkillBite — 파일 하나로 시작하는 AI 활용', description = 'AI에게 일하는 방법을 알려주는 지침 파일, 스킬을 골라 Claude에 추가해 보세요.', narrow = false } = Astro.props;
+const { title = 'SkillBite — 파일 하나로 시작하는 AI 활용', description = 'AI에게 일하는 방법을 알려주는 지침 파일, 스킬을 골라 Claude에 추가해 보세요.', detail = false } = Astro.props;
 const isHome = Astro.url.pathname === '/';
 // 공개 주소(astro.config의 site)가 정해지면 canonical과 공유 이미지 주소가 자동으로 붙는다. 현재 주소는 [확인 필요].
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : null;
@@ -45,7 +45,7 @@ const ogImage = Astro.site ? new URL('/og.png', Astro.site).href : null;
       </div>
     </header>
     <main id="main-content" tabindex="-1">
-      <div class:list={['container', { narrow }]}>
+      <div class:list={['container', { detail }]}>
         <slot />
       </div>
     </main>
