@@ -18,4 +18,10 @@ const { capabilities } = Astro.props;
   tbody th { font-weight: 600; width: 45%; }
   td { color: var(--text-sub); }
   td.need { color: var(--text); font-weight: 600; }
+  @media (max-width: 479px) {
+    thead { display: none; }
+    tr, th, td { display: block; }
+    tbody th { width: auto; padding: 12px 0 2px; border-bottom: 0; }
+    td { padding: 0 0 12px; }
+  }
 </style>

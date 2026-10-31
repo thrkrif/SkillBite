@@ -25,7 +25,7 @@ h1, h2, h3 { word-break: keep-all; overflow-wrap: anywhere; }
 h1 { font-size: 40px; font-weight: 700; line-height: 1.3; letter-spacing: -.03em; }
 h2 { font-size: 28px; font-weight: 700; line-height: 1.4; letter-spacing: -.025em; }
 h3 { font-size: 20px; line-height: 1.5; }
-p { overflow-wrap: anywhere; }
+p, li, td, th, dd { word-break: keep-all; overflow-wrap: break-word; }
 img { max-width: 100%; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { font-family: inherit; }
@@ -36,7 +36,6 @@ a:hover { text-decoration-thickness: 2px; }
 .meta { font-size: 14px; color: var(--text-mute); }
 .eyebrow { font-size: 14px; font-weight: 600; color: var(--text-sub); }
 .container { width: 100%; max-width: 1184px; margin-inline: auto; padding-inline: 32px; }
-.container.detail { max-width: 1040px; }
 .skip-link { position: absolute; top: 12px; left: 20px; z-index: 10; padding: 12px 20px; background: var(--surface); border: 2px solid var(--text); border-radius: 8px; transform: translateY(-160%); }
 .skip-link:focus { transform: translateY(0); }
 .site-header { border-bottom: 1px solid var(--border); }
@@ -66,11 +65,11 @@ main { min-width: 0; }
 .section { margin-top: 64px; }
 .section > h2 { margin-bottom: 24px; }
 .code { position: relative; display: flex; align-items: center; gap: 8px; min-width: 0; padding: 4px 4px 4px 12px; background: var(--code-bg); color: var(--code-text); border: 1px solid var(--border); border-radius: 6px; font-family: var(--mono); font-size: 14px; line-height: 1.6; }
-.code code { flex: 1; min-width: 0; overflow-x: auto; white-space: pre; font-family: inherit; }
+.code code { flex: 1; min-width: 0; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; word-break: normal; font-family: inherit; }
 .copy { flex: none; min-width: 44px; min-height: 44px; padding-inline: 10px; border: 0; border-radius: 6px; background: transparent; color: var(--text-sub); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
 .copy:hover { background: var(--border-soft); color: var(--text); }
 pre.code { margin: 0; display: block; padding: 16px; overflow-x: auto; }
-pre.code code { display: block; }
+pre.code code { display: block; white-space: pre; overflow-wrap: normal; }
 a, button { transition: color 160ms, background-color 160ms, border-color 160ms; }
 @media (max-width: 639px) {
   body { font-size: 16px; }

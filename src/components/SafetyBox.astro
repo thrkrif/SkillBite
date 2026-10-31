@@ -9,6 +9,9 @@ const { preview } = Astro.props;
 <style>
   p { color: var(--text-sub); }
   details { margin-top: 8px; }
-  summary { display: flex; align-items: center; cursor: pointer; min-height: 44px; font-size: 15px; font-weight: 600; }
+  summary { display: flex; align-items: center; gap: 6px; cursor: pointer; min-height: 44px; font-size: 15px; font-weight: 600; }
+  summary::before { content: '▸'; font-size: 12px; }
+  details[open] summary::before { content: '▾'; }
+  summary::-webkit-details-marker { display: none; }
   pre { margin-top: 8px; }
 </style>

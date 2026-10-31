@@ -2,7 +2,7 @@
 const { text } = Astro.props;
 ---
 <div class="copy-group">
-  <div class="code"><code>{text}</code><button class="copy" type="button" data-copy={text} hidden>복사</button></div>
+  <div class="code"><code>{text}</code><button class="copy" type="button" data-copy={text} aria-label={`${text} 복사`} hidden>복사</button></div>
   <span class="copy-status" role="status" aria-live="polite"></span>
 </div>
 <style>

@@ -10,6 +10,7 @@ const oses = [
 ---
 <section class="section" id="installation">
   <h2>설치 4단계</h2>
+  <p class="meta platform">맥 기준 안내예요. 윈도우 안내는 준비 중이에요.</p>
   <div class="tabs" role="group" aria-label="운영체제" hidden>
     {oses.map((o, i) => (
       <button class="tab" type="button" data-os={o.key} aria-pressed={String(i === 0)}>{o.label}</button>
@@ -60,6 +61,7 @@ const oses = [
 </section>
 
 <style>
+  .platform { margin: -8px 0 16px; }
   .tabs[hidden] { display: none; }
   .tabs { display: flex; gap: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
   .tab { min-height: 44px; margin-bottom: -1px; padding: 0 2px; border: 0; border-bottom: 2px solid transparent; background: none; color: var(--text-sub); font: inherit; cursor: pointer; }
@@ -75,8 +77,8 @@ const oses = [
   h3 { font-size: 17px; }
   .os-panel[hidden] { display: none; }
   code { font-family: var(--mono); font-size: 14px; }
-  kbd { font-family: var(--mono); font-size: 14px; padding: 1px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
-  .sub { margin: 8px 0 16px; padding-left: 24px; display: flex; flex-direction: column; gap: 12px; }
+  kbd { white-space: nowrap; font-family: var(--mono); font-size: 14px; padding: 1px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+  .sub { margin: 8px 0 16px; padding-left: 20px; list-style: disc; display: flex; flex-direction: column; gap: 12px; }
   .trouble { margin: 16px 0; padding-top: 4px; border-top: 1px solid var(--border); }
 </style>
 

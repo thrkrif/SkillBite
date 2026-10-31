@@ -15,7 +15,7 @@ export function getStaticPaths() {
 const { skill } = Astro.props;
 
 const file = `skills/${skill.id}/SKILL.md`;
-const preview = existsSync(file) ? readFileSync(file, 'utf-8').split('\n').slice(0, 14).join('\n') : '';
+const preview = existsSync(file) ? readFileSync(file, 'utf-8').trimEnd() : '';
 ---
 <Base title={`${skill.title} | SkillBite`} description={skill.summary} detail>
   <a class="back" href="/#skills">← 스킬 목록으로</a>
@@ -39,7 +39,7 @@ const preview = existsSync(file) ? readFileSync(file, 'utf-8').split('\n').slice
     </aside>
     <div class="content">
       <section class="section first" aria-labelledby="example-title">
-        <h2 id="example-title">이런 결과물이 나옵니다</h2>
+        <h2 id="example-title">{skill.exampleImages.length > 0 ? '이런 결과물이 나옵니다' : '결과물 구성 예시'}</h2>
         {skill.exampleImages.length > 0
           ? skill.exampleImages.map((src) => (
               <a href={src} target="_blank" rel="noopener noreferrer"><img class="shot" src={src} alt={`${skill.title} 결과물 예시`} loading="lazy" /></a>
@@ -56,14 +56,14 @@ const preview = existsSync(file) ? readFileSync(file, 'utf-8').split('\n').slice
       <FeatureTable capabilities={skill.capabilities} />
       <Steps skill={skill} />
       <Faq faqs={skill.faqs} />
-      <p class="end"><a href={skill.downloadUrl} download>스킬 파일 다운로드</a> <span class="meta">무료 · 가입 없음 · ZIP 파일 1개</span></p>
+      <p class="end"><a class="btn" href={skill.downloadUrl} download>스킬 파일 다운로드</a> <span class="meta">무료 · 가입 없음 · ZIP 파일 1개</span></p>
     </div>
   </div>
 </Base>
 <style>
   .back { display: inline-flex; align-items: center; min-height: 44px; margin-top: 24px; color: var(--text-sub); text-decoration: none; font-size: 14px; }
   .back:hover { color: var(--text); }
-  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; grid-template-areas: 'head summary' 'content summary'; column-gap: 64px; align-items: start; padding-top: 8px; }
+  .layout { max-width: 1040px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; grid-template-areas: 'head summary' 'content summary'; column-gap: 64px; align-items: start; padding-top: 8px; }
   .head { grid-area: head; display: flex; align-items: flex-start; gap: 20px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
   .content { grid-area: content; min-width: 0; max-width: 680px; }
   .summary { grid-area: summary; position: sticky; top: 24px; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
@@ -91,7 +91,7 @@ const preview = existsSync(file) ? readFileSync(file, 'utf-8').split('\n').slice
   .example-document dt { font-size: 14px; font-weight: 700; padding-top: 2px; }
   .example-document dd { margin: 0; color: var(--text-sub); font-size: 16px; }
   .end { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
-  .end a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
+  .end .btn { font-size: 17px; }
   @media (max-width: 959px) {
     .layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'head' 'summary' 'content'; }
     .summary { position: static; margin-top: 24px; }
@@ -100,8 +100,8 @@ const preview = existsSync(file) ? readFileSync(file, 'utf-8').split('\n').slice
   }
   @media (max-width: 639px) {
     .back { margin-top: 16px; }
-    .head { display: block; }
-    .detail-icon { width: 48px; height: 48px; margin-bottom: 16px; }
+    .head { gap: 12px; }
+    .detail-icon { width: 40px; height: 40px; }
     h1 { font-size: 28px; }
     .section.first { margin-top: 32px; }
     .example-document, .example-empty { padding: 24px 16px; }
