@@ -1,22 +1,17 @@
 ---
 const { preview } = Astro.props;
 ---
-<section class="box safe" aria-labelledby="safety-title">
-  <div class="safety-intro">
-    <svg width="32" height="36" viewBox="0 0 32 36" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m16 3 11 4v10c0 7-5 12-11 15C10 29 5 24 5 17V7L16 3Z"/><path d="m11 17 4 4 7-8"/></svg>
-    <div><h2 id="safety-title">받은 파일은 글자로 된 지침입니다.</h2>
-      <p>ZIP 안에는 스킬 폴더와 SKILL.md가 들어 있습니다. <br /> 파일이 저절로 실행되지는 않으며, Claude에 추가하면 AI가 일하는 방법을 안내합니다. <br /> 메모장으로 내용을 확인하실 수 있습니다.</p>
-    </div>
-  </div>
-  {preview && <details><summary>파일 내용 미리보기</summary><pre class="code"><code>{preview}</code></pre></details>}
+<section class="section" id="safety" aria-labelledby="safety-title">
+  <h2 id="safety-title">받은 파일은 글자로 된 지침입니다</h2>
+  <p>ZIP 안에는 스킬 폴더와 SKILL.md가 들어 있습니다. 파일이 저절로 실행되지는 않으며, Claude에 추가하면 AI가 일하는 방법을 안내합니다. 메모장으로 열어 내용을 직접 확인하실 수 있습니다.</p>
+  {preview && <details><summary>파일 내용 보기</summary><pre class="code"><code>{preview}</code></pre></details>}
 </section>
 <style>
-  .safety-intro { display: flex; align-items: flex-start; gap: 16px; }
-  .safety-intro > div { min-width: 0; flex: 1; }
-  svg { flex: none; }
-  .safe h2 { font-size: 18px; margin-bottom: 8px; }
-  .safe p { font-size: 15px; }
-  details { margin-top: 16px; border-top: 1px solid var(--border); }
-  summary { cursor: pointer; min-height: 44px; padding: 12px 0 0; font-size: 14px; font-weight: 700; }
-  pre { margin-top: 16px; }
+  p { color: var(--text-sub); }
+  details { margin-top: 8px; }
+  summary { display: flex; align-items: center; gap: 6px; cursor: pointer; min-height: 44px; font-size: 15px; font-weight: 600; }
+  summary::before { content: '▸'; font-size: 12px; }
+  details[open] summary::before { content: '▾'; }
+  summary::-webkit-details-marker { display: none; }
+  pre { margin-top: 8px; }
 </style>
