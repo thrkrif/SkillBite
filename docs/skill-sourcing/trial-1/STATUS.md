@@ -14,7 +14,13 @@
 ## 채택 작업 (1건씩 먼저, 공정 확인)
 | 항목 | 원본 | 우리 id | 작성 | 시험 실행 | 상태 |
 | --- | --- | --- | --- | --- | --- |
-| 메일 답장 | stanlee7 `email-reply-kr` | `email-reply` | [ ] | [ ] R0/3 | [ ] |
-| 개조식 보고서 | stanlee7 `report-gaejosik` | `doc-writer-report` | [ ] | [ ] R0/3 | [ ] |
+| 메일 답장 | stanlee7 `email-reply-kr` | `email-reply` | [x] | [x] R1 수정 → R2 합격 (2/3 사용) | [x] |
+| 개조식 보고서 | stanlee7 `report-gaejosik` | `doc-writer-report` | [x] | [x] R1 수정 → R2 합격 (2/3 사용, 경미 문구 1건 보완) | [x] |
 
 나머지 후보(`weekly-report`, `pumui-draft`, `gongmun-tone`, `meeting-to-todo`, `korean-writing-refiner`, `collab-meeting`)는 위 2건으로 공정을 확인한 뒤에 진행한다.
+
+## 결과 요약
+- R1(입력 4개씩): 둘 다 수정 후 재시험. 원본에서 5점·4점이던 스킬도 실행하니 고칠 곳이 나왔다(근거 없는 결론, 범위 표현 변형, 감정 추측, 첫 문단 정의 모호).
+- R1은 입력이 스킬 안 예시와 같아 응답이 예시와 글자 단위로 같았다. R2부터 예시와 다른 입력을 쓴다.
+- R2: 둘 다 합격. 채점표 `grade-r1.md`, `grade-r2.md`.
+- 남은 위험: 입력 4건씩이라 규칙 전체를 덮지 못함, 같은 모델이 실행·채점해 편향 가능, 1회 실행이라 재현성 미확인, 실제 설치 후 `/스킬이름` 호출은 시험하지 않음, 실제 회사 문서 관행과의 일치는 사용자 테스트 필요.
