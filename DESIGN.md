@@ -6,7 +6,7 @@
 - 이 파일이 색·타이포·간격·목록·반응형의 기준이다. 근거가 생기면 갱신할 수 있다(`docs/design/ui-overhaul/PLAN.md`). 개편 기록은 `docs/design/ui-overhaul/LOG.md`, 조사는 `research/`, 리뷰는 `reviews/`.
 - 이전 시안(`docs/design/frontend-refresh/`)은 파랑 중심의 옛 방향이며 더 이상 기준이 아니다.
 - 화면은 목록과 상세에서 출발하며 고정이 아니다. 필요하면 늘린다(404는 추가됨).
-- 사실: Astro + 순수 CSS, 스킬 5개(글쓰기 3, 문서 작성 2), 결과물 이미지 0개. 최신 `install.js`는 맥 경로와 Claude Code·데스크톱 앱의 재시작 불필요를 직접 확인한 것으로 기록한다. 윈도우 경로는 미확인이다.
+- 사실: Astro + 순수 CSS, 스킬 7개(글쓰기 3, 문서 작성 4), 결과물 이미지 0개. 최신 `install.js`는 맥 경로와 Claude Code·데스크톱 앱의 재시작 불필요를 직접 확인한 것으로 기록한다. 윈도우 경로는 미확인이다.
 - 증거는 실제 생성한 파일만 쓴다. 홈 스크린샷은 `docs/design/ui-overhaul/screenshots/`.
 
 ## Brand

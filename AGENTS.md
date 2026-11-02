@@ -57,7 +57,8 @@
 | `DESIGN.md` | 디자인 토큰, 목록·상세 화면 규격 |
 | `docs/HANDOFF.md` | 기술 스택, 폴더 구조, 데이터 스키마, 구현 주의 |
 | `docs/TASKS.md` | 단계별 체크리스트 |
-| `docs/SKILL_SPEC.md` | 스킬 파일(SKILL.md) 작성 기준. 네이버·벨로그·티스토리·Word·한글 |
+| `docs/SKILL_SPEC.md` | 스킬 파일(SKILL.md) 작성 기준. 네이버·벨로그·티스토리·Word·한글·메일 답장·개조식 보고서, 외부 스킬 출처 |
+| `docs/skill-sourcing/PROCESS.md` | 외부 스킬 소싱·검증 절차(에이전트 3개 고정, 검증 최대 3회, 체크박스 상태) |
 | `docs/CONTENT_AND_TEST.md` | 스크린샷·영상 명세, 친구 테스트 계획 |
 | `docs/brand-brief.md` | 로고 브리프(성격, 색, 금지 사항) |
 | `docs/design/ui-overhaul/PLAN.md` | 프론트 개편 계획, 절차, 리뷰 기준표(진행 기록은 같은 폴더 `LOG.md`) |
